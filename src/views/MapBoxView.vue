@@ -4,7 +4,7 @@
       <v-col cols="12">
       <v-card class="pl-4 pr-4">
         <v-row>
-          <v-col  cols="4">
+          <v-col  cols="12" xs="12" sm="4" md="4">
             <v-select
               label="View Mode"
               :items="viewModes"
@@ -14,60 +14,73 @@
               @change="changeViewMode"
             ></v-select>
           </v-col>
-          <v-col cols="2">            
+          <v-col cols="0" sm="2" md="4">      
           </v-col>
-          <v-col cols="6">
-            <v-row>
-              <v-col cols="12">
-                <v-combobox
-                  label="Select States in USA"
-                    :items="locations"
-                    v-model="location"
-                    item-text="place_name"
-                    
-                    @change="changeLocation"
-                    @keydown="keydownLocation"
-                  >            
-                  </v-combobox>
-              </v-col>
-              <v-col cols="12">
-                <v-range-slider
-                  v-model="range"
-                  :max="max"
-                  :min="min"
-                  hide-details
-                  class="align-center"
-                >
-                  <template v-slot:prepend>
-                    <v-text-field
-                      :value="range[0]"
-                      class="mt-0 pt-0"
-                      hide-details
-                      single-line
-                      type="number"
-                      style="width: 60px"
-                      @change="$set(range, 0, $event)"
-                    ></v-text-field>
-                  </template>
-                  <template v-slot:append>
-                    <v-text-field
-                      :value="range[1]"
-                      class="mt-0 pt-0"
-                      hide-details
-                      single-line
-                      type="number"
-                      style="width: 60px"
-                      @change="$set(range, 1, $event)"
-                    ></v-text-field>
-                  </template>
-                </v-range-slider>
-              </v-col>
-            </v-row>          
+          <v-col cols="12" xs="12" sm="6" md="4">
+            <v-card outlined class="pl-4 pr-4">
+            <v-card-title>Filters</v-card-title>
+              <v-divider></v-divider>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-select
+                      label="Select a State in USA"
+                      :items="US_States"
+                      v-model="state"
+                      item-text="place_name"
+                      
+                      @change="changeLocation"
+                      @keydown="keydownLocation"
+                    >            
+                    </v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-row>
+                  <v-col cols="6">
+                  <v-text-field
+                    label="Min Price"
+                    :value="range[0]"
+                    prefix="$"
+                    suffix="K"
+                    class="mt-0 pt-0"
+                    type="number"
+                    align="right"
+                    @change="$set(range, 0, $event)"
+                  ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                  <v-text-field
+                    label="Max Price"
+                    :value="range[1]"
+                    prefix="$"
+                    suffix="K"
+                    class="mt-0 pt-0"
+                    type="number"
+                    @change="$set(range, 1, $event)"
+                  ></v-text-field>
+                  </v-col>
+                </v-row>
+                  <v-range-slider
+                    v-model="range"
+                    :max="max"
+                    :min="min"
+                    hide-details
+                    style="display: none;"
+                    class="align-center"
+                  >
+                    <template v-slot:prepend>                    
+                    </template>
+                    <template v-slot:append>                    
+                    </template>
+                  </v-range-slider>
+                </v-col>
+              </v-row>  
+            </v-card>        
         </v-col>
         </v-row>
         </v-card>
       </v-col>
-      <v-col cols="12" style="height: 80%;">
+      <v-col cols="12" style="height: 65%;">
       <MglMap
           :accessToken="accessToken" 
           :mapStyle="mapStyle" 
@@ -87,24 +100,57 @@
             <div class="location-marker" slot="marker"></div>
             <MglPopup
               :closeButton="false"
-              :closeOnClick="true"
             >
               <v-card
-                class="mx-auto"
-                max-width="400"
+                max-width="128"
               >
                 <v-img
                   class="white--text align-end"
-                  height="200px"
+                  height="100px"
                   :src="geolocation.properties.image"
                 >
-                  <v-card-title>{{ geolocation.properties.address + ',' + geolocation.properties.city }}</v-card-title>
                 </v-img>
-                <v-card-subtitle class="pb-0">${{geolocation.properties.price}}</v-card-subtitle>
+                <v-card-subtitle class="pb-0">Price: ${{geolocation.properties.price}}K</v-card-subtitle>
               </v-card>
             </MglPopup>
           </MglMarker>
       </MglMap>
+
+      <v-dialog
+        v-model="dialog"
+        max-width="600"
+      >
+        <v-card>
+          <v-card-title class="headline">{{ locationString }}</v-card-title>
+
+            <v-carousel>
+              <v-carousel-item
+                v-for="(item,i) in locationImages"
+                :key="i"
+                :src="item"
+                reverse-transition="fade-transition"
+                transition="fade-transition"
+              ></v-carousel-item>
+            </v-carousel>
+
+          <v-card-text>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog = false"
+            >
+              Close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
     </v-col>
   </v-row>
   </v-layout>
@@ -116,6 +162,7 @@ import { MglMap, MglMarker, MglPopup, } from "vue-mapbox"
 import axios from 'axios'
 
 import { geoJSON } from './data'
+import { USStates } from './USStates'
 
 export default {
   name: 'MapBoxView',
@@ -132,13 +179,16 @@ export default {
       geolocations: [],
       center: [-95.7129, 37.0902],
       zoom: 3,
-
+      marker: null,
+      
+      dialog: false,
       viewMode: 'streets',
       viewModes: [
         {'value': 'streets', 'text': 'Street View'},
         {'value': 'satellite', 'text': 'Satellite View'},
       ],
-      locations: [],
+      US_States: [],
+      state: '',
       location: null,
       locationKeyword: '',
       typing: false,
@@ -146,7 +196,9 @@ export default {
       min: 100000,
       max: 1,
       range: [100000, 1],
-
+      locationData: null,
+      locationString: '',
+      locationImages: [],
     };
   },
 
@@ -169,6 +221,8 @@ export default {
          this.range[0] = this.min
        }
      }
+
+     this.US_States = USStates.map(state => state.name)     
   },
 
   methods: {
@@ -178,20 +232,45 @@ export default {
     },
     makerMouseEnter(event) {
       event.marker.togglePopup()
+      this.marker = event.marker
     },
     makerMouseLeave(event) {
       event.marker.togglePopup()
+      this.marker = event.marker
     },
     markerClick(geolocation){
-      console.log(geolocation)
+      this.marker.togglePopup()
+      this.locationData = geolocation
+      this.locationString = geolocation.properties.address + ', ' + geolocation.properties.city + ', ' + geolocation.properties.state
+      this.locationImages = [
+        'https://photos.zillowstatic.com/cc_ft_576/ISb13kddfh2v051000000000.jpg',
+        'https://photos.zillowstatic.com/cc_ft_576/IS3v08v6b9ux051000000000.jpg',
+        'https://photos.zillowstatic.com/cc_ft_576/ISvoyvc071m0151000000000.jpg',
+        'https://photos.zillowstatic.com/cc_ft_576/ISvg0ki77ed9g51000000000.jpg',
+        'https://photos.zillowstatic.com/cc_ft_576/ISrtn7t3mwge151000000000.jpg'
+      ]
+      this.dialog = true
     },
     changeViewMode(){
       this.mapStyle="mapbox://styles/mapbox/" + this.viewMode + "-v9"
     },
-    changeLocation(event) {
-      this.locations = []
-      this.typing = false
-      this.locationKeyword = ''
+    changeLocation() {        
+        const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + this.state + '.json?limit=10&types=region&access_token=' + this.accessToken
+        axios.get(url).then(response => {
+          // JSON responses are automatically parsed.
+          this.location = response.data.features[0]
+
+          const options = {
+            center: this.location.center,
+            zoom: 8
+          }
+          this.map.flyTo(options)
+          
+          this.applyFilters()
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })          
     },
     keydownLocation(event) { 
       if(event.keyCode > 31 && event.keyCode < 127 ){
@@ -224,27 +303,8 @@ export default {
   },
   watch: {
     typing(val) {      
-      if(!val){
-        this.locations = []
-        const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + this.locationKeyword + '.json?limit=10&types=region&access_token=' + this.accessToken
-        if (this.locationKeyword.length > 0){
-          axios.get(url).then(response => {
-            // JSON responses are automatically parsed.
-            this.locations = response.data.features
-          })
-          .catch(e => {
-            this.errors.push(e)
-          })          
-        }
-        else {
-          this.geolocations = this.features
-        }
-      }
     },
-    location(val) {
-      this.center = val.center
-      this.zoom = 6
-      this.applyFilters()
+    location(val) {      
     },
     range(val) {
       this.applyFilters()
@@ -278,5 +338,9 @@ export default {
   -webkit-box-align: center;
   align-items: center;
   cursor: pointer;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
 }
 </style>

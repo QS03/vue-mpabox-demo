@@ -336,7 +336,7 @@ export const geoJSON = {
                 ]
             },
             "properties": {
-                "price": 1230,
+                "price": 490,
                 "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
                 "phoneFormatted": "(202) 331-3355",
                 "phone": "2023313355",
@@ -346,6 +346,138 @@ export const geoJSON = {
                 "crossStreet": "at 19th St",
                 "postalCode": "98908",
                 "state": "Washington"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -96.8067992,
+                    32.7777453
+                ]
+            },
+            "properties": {
+                "price": 822,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "1601 Main St",
+                "city": "Dallas",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "98908",
+                "state": "Texas"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.333234,
+                    32.7654394
+                ]
+            },
+            "properties": {
+                "price": 342,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "2201 E 4th St",
+                "city": "Fort Worth",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "98908",
+                "state": "Texas"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.5165168,
+                    35.4575863
+                ]
+            },
+            "properties": {
+                "price": 612,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "210 Park Ave Suite 150",
+                "city": "Oklahoma City",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "98908",
+                "state": "Oklahoma"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -80.3615887,
+                    25.830054,
+                ]
+            },
+            "properties": {
+                "price": 499,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "401 Biscayne Blvd",
+                "city": "Miami",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "98908",
+                "state": "Florida"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -80.5487095,
+                    25.0036492
+                ]
+            },
+            "properties": {
+                "price": 922,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "90154 Overseas Hwy",
+                "city": "Tavernier",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "33070",
+                "state": "Florida"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -82.4510673,
+                    27.9441889,
+                ]
+            },
+            "properties": {
+                "price": 867,
+                "image": "https://photos.zillowstatic.com/cc_ft_960/ISfcyyzihowy2t0000000000.jpg",
+                "phoneFormatted": "(202) 331-3355",
+                "phone": "2023313355",
+                "address": "5223 Orient Rd",
+                "city": "Tampa",
+                "country": "United States",
+                "crossStreet": "at 19th St",
+                "postalCode": "33610",
+                "state": "Florida"
             }
         },
     ]
